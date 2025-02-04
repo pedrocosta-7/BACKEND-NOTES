@@ -1,6 +1,7 @@
 const { hash, compare } = require('bcryptjs')
 const AppError = require('../utils/AppError')
 const sqliteConnection = require('../database/sqlite')
+const knex = require('../database/knex')
 
 class UsersController {
   async create(request, response) {
@@ -20,7 +21,7 @@ class UsersController {
       [name, email, hashedPassword]
     )
 
-    return response.status(201).json()
+    return response.status(201).json({})
   }
 
   async update(request, response) {
@@ -68,6 +69,13 @@ class UsersController {
     )
 
     return response.json()
+  }
+  async delete(request, response) {
+  const {id} = request.params
+
+  await knex('users').where({id}).delete()
+
+  response.json({})
   }
 }
 
