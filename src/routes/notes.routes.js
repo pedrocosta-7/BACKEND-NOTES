@@ -11,9 +11,10 @@ const notesRoutes = Router()
 notesRoutes.use(ensureAuthenticated)
 
 notesRoutes.post("/", notesController.create)
-notesRoutes.get("/", notesController.show)
-notesRoutes.delete("/", notesController.delete)
+notesRoutes.get("/:id", notesController.show)  /*atenção*/
+notesRoutes.delete("/:id", notesController.delete)
 notesRoutes.get('/', notesController.index)
 
 module.exports = notesRoutes;
+
 
